@@ -49,7 +49,9 @@ jobs:
           !**/target/original-*.jar
     
     - name: Publish to GitHub Packages
-      run: ./mvnw deploy -DskipTests -T 2C -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/the-skrishna/shopizer
+      run: |
+        echo "Deploying to GitHub Packages..."
+        ./mvnw deploy -DskipTests -Dmaven.install.skip=true -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/the-skrishna/shopizer
       env:
         GITHUB_ACTOR: ${{ github.actor }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
