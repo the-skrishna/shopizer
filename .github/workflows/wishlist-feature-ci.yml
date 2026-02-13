@@ -40,7 +40,7 @@ jobs:
         path: '**/target/surefire-reports/*.xml'
     
     - name: Publish to GitHub Packages
-      run: ./mvnw deploy -DskipTests -Dnexus.skip=true
+      run: ./mvnw deploy -DskipTests
       env:
         GITHUB_ACTOR: ${{ github.actor }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
