@@ -39,8 +39,17 @@ jobs:
         name: test-results
         path: '**/target/surefire-reports/*.xml'
     
+    - name: Upload build artifacts (JARs)
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifacts
+        path: |
+          **/target/*.jar
+          !**/target/*-sources.jar
+          !**/target/original-*.jar
+    
     - name: Publish to GitHub Packages
-      run: ./mvnw deploy -DskipTests -T 2C
+      run: ./mvnw deploy -DskipTests -T 2C -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/the-skrishna/shopizer
       env:
         GITHUB_ACTOR: ${{ github.actor }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
