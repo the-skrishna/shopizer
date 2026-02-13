@@ -27,10 +27,10 @@ jobs:
         server-password: GITHUB_TOKEN
         
     - name: Build with Maven
-      run: ./mvnw clean install -DskipTests
+      run: ./mvnw clean install -DskipTests -T 2C
       
     - name: Run tests
-      run: ./mvnw test
+      run: ./mvnw test -T 2C
       
     - name: Upload test results
       if: always()
@@ -40,7 +40,7 @@ jobs:
         path: '**/target/surefire-reports/*.xml'
     
     - name: Publish to GitHub Packages
-      run: ./mvnw deploy -DskipTests
+      run: ./mvnw deploy -DskipTests -T 2C
       env:
         GITHUB_ACTOR: ${{ github.actor }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
