@@ -35,3 +35,8 @@ jobs:
       with:
         name: test-results
         path: '**/target/surefire-reports/*.xml'
+    
+    - name: Publish to GitHub Packages
+      run: ./mvnw deploy -DskipTests
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
